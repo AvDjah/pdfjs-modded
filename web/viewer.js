@@ -17,6 +17,8 @@ import { RenderingStates, ScrollMode, SpreadMode } from "./ui_utils.js";
 import { AppOptions } from "./app_options.js";
 import { LinkTarget } from "./pdf_link_service.js";
 import { PDFViewerApplication } from "./app.js";
+// eslint-disable-next-line sort-imports
+import { PDFFindBar } from "./pdf_find_bar.js";
 
 /* eslint-disable-next-line no-unused-vars */
 const pdfjsVersion =
@@ -218,6 +220,7 @@ if (
   webViewerLoad();
 } else {
   document.addEventListener("DOMContentLoaded", webViewerLoad, true);
+  PDFFindBar.dispatchEvent();
 }
 
 export {

@@ -592,10 +592,44 @@ const PDFViewerApplication = {
 
     const { appConfig, eventBus } = this;
     let file;
+
+    let searchString;
+
     if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
       const queryString = document.location.search.substring(1);
       const params = parseQueryString(queryString);
       file = params.get("file") ?? AppOptions.get("defaultUrl");
+
+      // eslint-disable-next-line no-unused-vars
+      searchString = params.get("searchstring") ?? null;
+
+      document.addEventListener("DOMContentLoaded", function () {
+        if (searchString !== null) {
+          const input = document.getElementById("findInput");
+          if (input !== null) {
+            input.value = searchString;
+          }
+
+          eventBus.dispatch("find", {
+            source: this,
+            type: "",
+            query: searchString,
+            caseSensitive: false,
+            entireWord: false,
+            highlightAll: true,
+            findPrevious: false,
+            matchDiacritics: false,
+          });
+
+          // Open search View
+          const viewFindbtn = document.getElementById("viewFind")
+          if(viewFindbtn !== null){
+            viewFindbtn.click()
+          }
+
+        }
+      });
+
       validateFileURL(file);
     } else if (PDFJSDev.test("MOZCENTRAL")) {
       file = window.location.href;
@@ -2157,6 +2191,7 @@ if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
     "null",
     "http://mozilla.github.io",
     "https://mozilla.github.io",
+    "http://localhost:5151",
   ];
   // eslint-disable-next-line no-var
   var validateFileURL = function (file) {
