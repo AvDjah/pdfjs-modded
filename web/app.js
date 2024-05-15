@@ -1293,7 +1293,8 @@ const PDFViewerApplication = {
       ])
         .then(async ([timeStamp, stored, pageLayout, pageMode, openAction]) => {
           const viewOnLoad = AppOptions.get("viewOnLoad");
-
+          // HardCoding to Open First Page
+          stored.page = 0
           this._initializePdfHistory({
             fingerprint: pdfDocument.fingerprints[0],
             viewOnLoad,
@@ -1651,6 +1652,7 @@ const PDFViewerApplication = {
     if (!this.pdfHistory) {
       return;
     }
+    return
     this.pdfHistory.initialize({
       fingerprint,
       resetHistory: viewOnLoad === ViewOnLoad.INITIAL,

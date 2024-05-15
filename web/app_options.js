@@ -127,7 +127,7 @@ const defaultOptions = {
   },
   disableHistory: {
     /** @type {boolean} */
-    value: false,
+    value: true,
     kind: OptionKind.VIEWER,
   },
   disablePageLabels: {

@@ -2087,7 +2087,7 @@ gulp.task(
 
       const { WebServer } = await import("./test/webserver.mjs");
       const server = new WebServer();
-      server.port = 8888;
+      server.port = 8889;
       server.start();
     }
   )
